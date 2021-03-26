@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule,],
   providers: [],
   bootstrap: [AppComponent],
 })

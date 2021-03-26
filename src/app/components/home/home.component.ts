@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 
 
@@ -9,15 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  readonly ROOT_URL = 'https://backend.menara.ma/api/prayers/82/3/';
-  prayers: any;
-  constructor(private http: HttpClient) {}
+
+  constructor() {}
 
   ngOnInit(): void {}
 
-  getPrayers() {
-    this.prayers = this.http.get(this.ROOT_URL);
 
-    console.log(this.prayers)
-  }
 }
