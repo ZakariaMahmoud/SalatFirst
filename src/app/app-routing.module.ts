@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './components/home/home.component'
-const routes: Routes = [{ path: '', component: HomeComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./components/home/home.module').then((m) => m.HomeModule),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), CommonModule],

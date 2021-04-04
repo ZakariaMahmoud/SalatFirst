@@ -1,3 +1,9 @@
+
+@font-face{
+  font-family: "Uthmani";
+  src: url("/assets/fonts/uthman.ttf") format("truetype");
+}
+
 header{
   background-color: #607d8b;
   background-image: url("/assets/images/header_background.png") ;
@@ -71,8 +77,11 @@ header{
 
 .timer .div-two{
   height: 60px;
-  padding-top:20px;
-  font-size:40px
+  padding-top:12px;
+  font-weight: bold;
+  font-size:40px;
+  font-family: serif;
+  direction: ltr;
 }
 .timer .div-three{
   height: 70px;
@@ -131,4 +140,12 @@ header{
 .next-prayer{
   font-weight: bold;
     color: #2a9689;
+}
+
+.aya{
+  font-size: x-large;
+  font-family: "Uthmani";
+  color: #0c5f55;
+  font-weight: bold;
+  text-align: center;
 }

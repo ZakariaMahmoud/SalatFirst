@@ -5,12 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeModule } from './home/home.module';
 
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
-  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule, HomeModule,],
+  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule,],
   providers: [],
   bootstrap: [AppComponent],
 })

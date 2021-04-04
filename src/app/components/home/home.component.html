@@ -18,25 +18,28 @@
         <p>
           <span class="color-green">الساعة</span> : <span class="color-orange timenow">{{timer}}</span> حسب التوقيت المحلي في الرباط
           <br>
-          <span class="color-green">التاريخ هجري</span> : السبت 21 شعبان 1442 هجرية
-        <br>
           <span class="color-green">تاريخ اليوم</span>: {{miladi}}
         </p>
+
+        <div class="aya">
+            قال تعالى {{'{'}} إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا {{'}'}} [النساء-103]
+        </div>
+
     </div>
 
     <div class="col-md-5 text-right text-white">
 
       <div class="timer">
               <div class="bg-green text-center div-one">
-                متبقي على صلاة الظهر
+                متبقي على صلاة {{next_prayer[1]}}
               </div>
 
               <div class="bg-grey text-center div-two">
-                02:34:44
+                {{difTime}}
               </div>
 
               <div class="bg-green text-center div-three">
-                صلاة الظهر الساعة 1:31 PM
+                صلاة {{next_prayer[1]}} على الساعة {{next_prayer[0]}} دقيقة
               </div>
       </div>
     </div>
@@ -52,7 +55,7 @@
       <div class="th">
 <i class="fa fa-moon-o" aria-hidden="true"></i> الفجر
       </div>
-      <div class="td">
+      <div class="td" [ngClass]="{'next-prayer':selector == 'fajr'}">
 {{Prayer.fajr}}
       </div>
     </div>
@@ -77,7 +80,7 @@
       <div class="th">
       <i class="fa fa-sun-o" aria-hidden="true"></i> العصر
       </div>
-      <div class="td">
+      <div class="td" [ngClass]="{'next-prayer':selector == 'asr'}">
         {{Prayer.asr}}
       </div>
     </div>
@@ -85,7 +88,7 @@
       <div class="th">
         <i class="fa fa-moon-o" aria-hidden="true"></i> المغرب
       </div>
-      <div class="td">
+      <div class="td" [ngClass]="{'next-prayer':selector == 'maghreb'}">
         {{Prayer.maghreb}}
       </div>
     </div>
@@ -93,17 +96,17 @@
       <div class="th">
         <i class="fa fa-moon-o" aria-hidden="true"></i> العشاء
       </div>
-      <div class="td">
+      <div class="td" [ngClass]="{'next-prayer':selector == 'ichaa'}">
         {{Prayer.ichaa}}
       </div>
     </div>
   </div>
 
-  <div class="text-center mt-4">
+  <!-- <div class="text-center mt-4">
       <a class="bg-green a-link" href="#">
 مواقيت الصلاة لشهر أبريل الرباط
       </a>
-  </div>
+  </div> -->
 </div>
 
 

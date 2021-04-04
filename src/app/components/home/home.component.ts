@@ -1,33 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser'
-
 import { Prayer } from '../../classes/prayer';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  timer: any = "05:40:59";
+  timer: any = '--:--:--';
   miladi: any;
+  countDownDate: any;
+  difTime: string = '--:--:--';
   Prayer: Prayer = new Prayer();
-  selector: string = "fajr";
+  selector: string = '';
+  next_prayer: Array<any> = [];
   constructor(private http: HttpClient) {
     this.getPrayers('https://prayertimes.mahmoud.ma/api/69/today');
   }
 
   ngOnInit(): void {
     setInterval(() => {
-      // moment.locale('ar-ma');
-      // this.timer = moment().format('LTS');
-      // this.miladi =
-      //   moment().format('dddd') + ' ' + moment().format(' DD MMM YYYY');
+      moment.locale('ar-ma');
+      this.timer = moment().format('LTS');
+      this.miladi =
+        moment().format('dddd') + ' ' + moment().format(' DD MMM YYYY');
       this.nextPrayer();
     }, 1000);
   }
-  getDiff() {}
+
   getPrayers(ROOT_URL: string): any {
     this.http.get(ROOT_URL).subscribe((data: any) => {
       this.Prayer.fajr = data['fajr'];
@@ -40,7 +41,6 @@ export class HomeComponent implements OnInit {
   }
 
   nextPrayer() {
-
     var time = this.timer.split(':');
     var fajr = this.Prayer.fajr.split(':');
     var dohr = this.Prayer.dohr.split(':');
@@ -55,20 +55,62 @@ export class HomeComponent implements OnInit {
     var intmaghreb = parseInt(maghreb[0] + maghreb[1]);
     var intichaa = parseInt(ichaa[0] + ichaa[1]);
 
-    inttime >= intfajr ? (this.selector = "dohr") : "";
+    inttime >= intfajr ? (this.selector = 'dohr') : '';
     inttime >= intdohr ? (this.selector = 'asr') : '';
     inttime >= intasr ? (this.selector = 'maghreb') : '';
     inttime >= intmaghreb ? (this.selector = 'ichaa') : '';
     inttime >= intichaa ? (this.selector = 'fajr') : '';
 
+    this.next_prayer = this.Prayer.nextPrayer(this.selector);
 
-      console.log(this.selector)
+    this.countDiffPrayer();
+  }
 
-    // time[0] < fajr[0] && time[1] < fajr[1] ? console.log('fajr YES') : '';
-    // time[0] < dohr[0] && time[1] < dohr[1] ? console.log('dohr YES') : '';
-    // time[0] < asr[0] && time[1] < asr[1] ? console.log('asr YES') : '';
-    // time[0] < maghreb[0] && time[1] < maghreb[1]? console.log('maghreb YES')
-    //   : '';
-    // time[0] < ichaa[0] && time[1] < ichaa[1] ? console.log('ichaa YES') : '';
+  countDiffPrayer() {
+    var time = this.timer.split(':');
+
+    var ichaa = this.Prayer.ichaa.split(':');
+
+    var today = new Date();
+    var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+    if (time[0] >= ichaa[0] && time[1] >= ichaa[1]) {
+      this.countDownDate = new Date(
+        tomorrow.getMonth() +
+          1 +
+          '/' +
+          tomorrow.getDate() +
+          '/' +
+          tomorrow.getFullYear() +
+          ' ' +
+          this.Prayer.fajr
+      ).getTime();
+    } else {
+      this.countDownDate = new Date(
+        today.getMonth() +
+          1 +
+          '/' +
+          today.getDate() +
+          '/' +
+          today.getFullYear() +
+          ' ' +
+          this.Prayer.fajr
+      ).getTime();
+    }
+
+    var now = new Date().getTime();
+    var distance = this.countDownDate - now;
+
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var h = hours < 10 ? '0' + hours : hours;
+    var m = minutes < 10 ? '0' + minutes : minutes;
+    var s = seconds < 10 ? '0' + seconds : seconds;
+
+    this.difTime = h + ' : ' + m + ' : ' + s;
   }
 }
