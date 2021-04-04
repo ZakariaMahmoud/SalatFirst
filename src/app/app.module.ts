@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import 'tailwindcss/tailwind.css';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeModule } from './home/home.module';
+
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule,],
+  declarations: [AppComponent, NavbarComponent],
+  imports: [CommonModule,BrowserModule, AppRoutingModule, HttpClientModule, HomeModule,],
   providers: [],
   bootstrap: [AppComponent],
 })

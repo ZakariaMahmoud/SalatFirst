@@ -1,70 +1,109 @@
-<div class="container h-100">
-  <div class="d-flex justify-content-md-center text-center vh-100 divmain">
-    <div class="main">
-      <div class="container">
-        <h1>مواقيت الصلاة</h1>
-        <div class="row " style="flex-direction: row-reverse;">
-          <div class="col-md-5 text-right my-auto mt-4" >
-            <h2>الرباط - المغرب</h2>
-            <div class="date" dir="rtl">
-              <h3>الإثنين 16 شعبان 1442 هـ</h3>
-              <h3>29 مارس 2021 ميلادي </h3>
-              <div class="section">
-                <h4>
-                  الساعة اﻵن 13:49:05
-                </h4>
-                <h3>
-                  متبقي على صلاة المغرب
-                </h3>
-                <div class="time" dir="ltr">
-                  <span class="sequare">23</span> : <span class="sequare">30</span> : <span class="sequare">59</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-7 mt-4 prayer">
+<header class="text-center">
 
-        <div dir="rtl">
-    <div class="form-group">
-      <select class="form-control" id="select">
-        <option>الرباط</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+  <h1>مواقيت الصلاة اليوم في الرباط</h1>
+  <h2>مواعيد او مواقيت الصلاة والاذان اليوم في الرباط لكل الفروض الفجر,الظهر, العصر, المغرب, العشاء .</h2>
+
+</header>
+
+
+<div class="container mt-3" >
+
+  <div class="row">
+    <div class="col-md-7 text-right">
+        <h3>
+
+          المغرب, الرباط
+        </h3>
+
+        <p>
+          <span class="color-green">الساعة</span> : <span class="color-orange timenow">{{timer}}</span> حسب التوقيت المحلي في الرباط
+          <br>
+          <span class="color-green">التاريخ هجري</span> : السبت 21 شعبان 1442 هجرية
+        <br>
+          <span class="color-green">تاريخ اليوم</span>: {{miladi}}
+        </p>
     </div>
-        </div>
-            <div class="row" dir="rtl">
-              <div class="col-md-2 col-4">
-                <div class="th th2">الفجر</div>
-                <div class="td td2">04:22</div>
+
+    <div class="col-md-5 text-right text-white">
+
+      <div class="timer">
+              <div class="bg-green text-center div-one">
+                متبقي على صلاة الظهر
               </div>
-              <div class="col-md-2 col-4">
-                <div class="th th1">الشروق</div>
-                <div class="td td1">05:49</div>
+
+              <div class="bg-grey text-center div-two">
+                02:34:44
               </div>
-              <div class="col-md-2 col-4">
-                <div class="th th2">الظهر</div>
-                <div class="td td2">12:00</div>
+
+              <div class="bg-green text-center div-three">
+                صلاة الظهر الساعة 1:31 PM
               </div>
-              <div class="col-md-2 col-4">
-                <div class="th th1">العصر</div>
-                <div class="td td1">15:31</div>
-              </div>
-              <div class="col-md-2 col-4">
-                <div class="th th2">المغرب</div>
-                <div class="td td2">18:12</div>
-              </div>
-              <div class="col-md-2 col-4">
-                <div class="th th1">العشاء</div>
-                <div class="td td1">19:29</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+
+  <div class="text-right mt-3">
+    <h3>مواقيت الاذان في الرباط</h3>
+  </div>
+
+  <div class="row mr-2 ml-2">
+
+    <div class="col-sm-2">
+      <div class="th">
+<i class="fa fa-moon-o" aria-hidden="true"></i> الفجر
+      </div>
+      <div class="td">
+{{Prayer.fajr}}
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="th">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>  الشروق
+      </div>
+      <div class="td">
+        {{Prayer.sunrise}}
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="th" >
+      <i class="fa fa-sun-o" aria-hidden="true"></i> الظهر
+      </div>
+      <div class="td" [ngClass]="{'next-prayer':selector == 'dohr'}">
+        {{Prayer.dohr}}
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="th">
+      <i class="fa fa-sun-o" aria-hidden="true"></i> العصر
+      </div>
+      <div class="td">
+        {{Prayer.asr}}
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="th">
+        <i class="fa fa-moon-o" aria-hidden="true"></i> المغرب
+      </div>
+      <div class="td">
+        {{Prayer.maghreb}}
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="th">
+        <i class="fa fa-moon-o" aria-hidden="true"></i> العشاء
+      </div>
+      <div class="td">
+        {{Prayer.ichaa}}
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+      <a class="bg-green a-link" href="#">
+مواقيت الصلاة لشهر أبريل الرباط
+      </a>
+  </div>
 </div>
+
 

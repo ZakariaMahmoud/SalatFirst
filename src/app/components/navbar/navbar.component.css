@@ -1,0 +1,24 @@
+nav{
+   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+.bg-navbar{
+  background-color: #607d8b!important;
+}
+
+.navbar{
+  text-align: center;
+  justify-content: center;
+  padding:0px
+}
+
+.navbar-brand{
+  margin-right: 0px;
+}
+
+.nav-logo{
+  width:40px
+}
+
+
+

@@ -4,28 +4,7 @@
 
 body{
   font-family: 'Tajawal';
-  color:white;
-  font-weight:bold;
-  height: 100%;
+  background-color: #f1f1f1;
 }
 
-
-.background{
-  height: 100%;
-   background: url('/assets/images/background.png');
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center center;
-   z-index: -1;
-}
-
-.background::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    /* background-color: rgba(35, 30, 96, 0.8); */
-}
 
