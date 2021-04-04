@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   countDownDate: any;
   difTime: string = '--:--:--';
   Prayer: Prayer = new Prayer();
-  selector: string = '';
+  selector: string = 'fajr';
   next_prayer: Array<any> = [];
   constructor(private http: HttpClient) {
     this.getPrayers('https://prayertimes.mahmoud.ma/api/69/today');
