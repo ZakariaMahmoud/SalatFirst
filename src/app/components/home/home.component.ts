@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
           '/' +
           tomorrow.getFullYear() +
           ' ' +
-          this.Prayer.fajr
+          this.next_prayer[0]
       ).getTime();
     } else {
       this.countDownDate = new Date(
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
           '/' +
           today.getFullYear() +
           ' ' +
-          this.Prayer.fajr
+          this.next_prayer[0]
       ).getTime();
     }
 
