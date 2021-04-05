@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Prayer } from '../../classes/prayer';
 import * as moment from 'moment';
+import {ActivatedRoute, Router } from '@angular/router';
+import { City } from 'src/app/classes/city';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,17 +11,32 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
   timer: any = '--:--:--';
+  cityid: any = 69;
+  cities: Array<City> = [];
   miladi: any;
   countDownDate: any;
   difTime: string = '--:--:--';
   Prayer: Prayer = new Prayer();
+  City: City = new City();
   selector: string = 'fajr';
   next_prayer: Array<any> = [];
-  constructor(private http: HttpClient) {
-    this.getPrayers('https://prayertimes.mahmoud.ma/api/69/today');
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    console.log('constrictor');
+    let id = this.route.snapshot.paramMap.get('id');
+    this.cityid = id && parseInt(id) > 0 && parseInt(id) < 116 ? id : 69;
+    this.getName('https://prayertimes.mahmoud.ma/api/cities/' + this.cityid);
+    this.getPrayers(
+      'https://prayertimes.mahmoud.ma/api/' + this.cityid + '/today'
+    );
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit');
+    this.getCities();
     setInterval(() => {
       moment.locale('ar-ma');
       this.timer = moment().format('LTS');
@@ -29,7 +46,29 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
 
-  getPrayers(ROOT_URL: string): any {
+  getName(ROOT_URL: string) {
+    this.http.get(ROOT_URL).subscribe((data: any) => {
+      this.City.nameFR = data['nameFR'];
+      this.City.nameAR = data['nameAR'];
+    });
+  }
+
+  getCities() {
+    this.http
+      .get('https://www.prayertimes.mahmoud.ma/api/cities')
+      .subscribe((data: any) => {
+        for (let i = 1; i <= 115; i++) {
+          var city = new City();
+          city = data[i];
+          this.cities.push(city);
+        }
+      });
+  }
+  goto(id: number) {
+    console.log(id);
+    this.router.navigate([id]);
+  }
+  getPrayers(ROOT_URL: string) {
     this.http.get(ROOT_URL).subscribe((data: any) => {
       this.Prayer.fajr = data['fajr'];
       this.Prayer.sunrise = data['sunrise'];
@@ -40,7 +79,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  nextPrayer() {
+  async nextPrayer() {
     var time = this.timer.split(':');
     var fajr = this.Prayer.fajr.split(':');
     var dohr = this.Prayer.dohr.split(':');

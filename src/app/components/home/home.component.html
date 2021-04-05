@@ -1,76 +1,77 @@
 <header class="text-center">
 
-  <h1>مواقيت الصلاة اليوم في الرباط</h1>
-  <h2>مواعيد او مواقيت الصلاة والاذان اليوم في الرباط لكل الفروض الفجر,الظهر, العصر, المغرب, العشاء .</h2>
+  <h1>مواقيت الصلاة اليوم في {{City.nameAR}}</h1>
+  <h2>مواعيد او مواقيت الصلاة والاذان اليوم في {{City.nameAR}} لكل الفروض الفجر,الظهر, العصر, المغرب, العشاء .</h2>
 
 </header>
 
 
-<div class="container mt-3" >
+<div class="container mt-3 bg-white">
 
   <div class="row">
     <div class="col-md-7 text-right">
-        <h3>
+      <h3>
 
-          المغرب, الرباط
-        </h3>
+        المغرب, {{City.nameAR}}
+      </h3>
 
-        <p>
-          <span class="color-green">الساعة</span> : <span class="color-orange timenow">{{timer}}</span> حسب التوقيت المحلي في الرباط
-          <br>
-          <span class="color-green">تاريخ اليوم</span>: {{miladi}}
-        </p>
+      <p>
+        <span class="color-green">الساعة</span> : <span class="color-orange timenow">{{timer}}</span> حسب التوقيت المحلي
+        في {{City.nameAR}}
+        <br>
+        <span class="color-green">تاريخ اليوم</span>: {{miladi}}
+      </p>
 
-        <div class="aya">
-            قال تعالى {{'{'}} إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا {{'}'}} [النساء-103]
-        </div>
+      <div class="aya">
+        قال تعالى {{'{'}} إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا {{'}'}} [النساء-103]
+      </div>
 
     </div>
 
     <div class="col-md-5 text-right text-white">
 
       <div class="timer">
-              <div class="bg-green text-center div-one">
-                متبقي على صلاة {{next_prayer[1]}}
-              </div>
+        <div class="bg-green text-center div-one">
+          متبقي على صلاة {{next_prayer[1]}}
+        </div>
 
-              <div class="bg-grey text-center div-two">
-                {{difTime}}
-              </div>
+        <div class="bg-grey text-center div-two">
+          {{difTime}}
+        </div>
 
-              <div class="bg-green text-center div-three">
-                صلاة {{next_prayer[1]}} على الساعة {{next_prayer[0]}} دقيقة
-              </div>
+        <div class="bg-green text-center div-three">
+          صلاة {{next_prayer[1]}} على الساعة {{next_prayer[0]}} دقيقة
+        </div>
       </div>
     </div>
   </div>
 
   <div class="text-right mt-3">
-    <h3>مواقيت الاذان في الرباط</h3>
+    <h3>مواقيت الاذان في {{City.nameAR}}</h3>
   </div>
 
   <div class="row mr-2 ml-2">
 
     <div class="col-sm-2">
       <div class="th">
-<i class="fa fa-moon-o" aria-hidden="true"></i> الفجر
+        <i class="fa fa-moon-o" aria-hidden="true"></i> الفجر
       </div>
       <div class="td" [ngClass]="{'next-prayer':selector == 'fajr'}">
-{{Prayer.fajr}}
+        {{Prayer.fajr}}
       </div>
     </div>
 
     <div class="col-sm-2">
       <div class="th">
-      <i class="fa fa-sun-o" aria-hidden="true"></i>  الشروق
+        <i class="fa fa-sun-o" aria-hidden="true"></i> الشروق
       </div>
       <div class="td">
         {{Prayer.sunrise}}
       </div>
     </div>
     <div class="col-sm-2">
-      <div class="th" >
-      <i class="fa fa-sun-o" aria-hidden="true"></i> الظهر
+      <div class="th">
+        <i class="fa fa-sun-o" aria-hidden="true"></i> الظهر
       </div>
       <div class="td" [ngClass]="{'next-prayer':selector == 'dohr'}">
         {{Prayer.dohr}}
@@ -78,7 +79,7 @@
     </div>
     <div class="col-sm-2">
       <div class="th">
-      <i class="fa fa-sun-o" aria-hidden="true"></i> العصر
+        <i class="fa fa-sun-o" aria-hidden="true"></i> العصر
       </div>
       <div class="td" [ngClass]="{'next-prayer':selector == 'asr'}">
         {{Prayer.asr}}
@@ -101,12 +102,34 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="text-center mt-4">
-      <a class="bg-green a-link" href="#">
-مواقيت الصلاة لشهر أبريل الرباط
-      </a>
+<!--
+  <div class="text-center mt-4">
+    <a class="bg-green a-link" href="#">
+      مواقيت الصلاة لشهر أبريل في {{City.nameAR}}
+    </a>
   </div> -->
 </div>
 
 
+<div class="container text-right mt-2 pt-2 bg-white">
+
+  <h3>
+    مدن المغرب
+  </h3>
+
+</div>
+
+<div class="container mt-2 text-right" dir="rtl">
+<div class="row" *ngIf="cities.length != 0">
+  <div class="col-md-3 pl-1 pr-1 pt-1" *ngFor="let item of cities; let i = index">
+    <div class="text-right ">
+      <a class=" a-link-city" href="{{'../'+(i+1)}}">
+        <div class="div-city pr-2">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          {{item['nameAR']}}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>

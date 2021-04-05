@@ -30,13 +30,19 @@ header{
         padding-top: 15px;
       }
 }
-
+.row{
+  margin-left:0px;
+  margin-right:0px
+}
 .container{
-  background-color: white;
+
   padding: 10px;
    line-height: 35px;
 }
 
+.bg-white{
+  background-color:white;
+}
 
 
 @media (min-width: 1200px){
@@ -108,13 +114,19 @@ header{
 
 
 .a-link{
-  text-decoration: none;
+
+text-decoration: none;
   color: white;
   padding:12px 10px 10px 10px;
 
   font-size:18px;
+}
+.a-link:hover{
+  background-color : #607d8b;
+  color: black;
 
 }
+
 
 .timenow{
   width:50px;
@@ -122,11 +134,7 @@ header{
 }
 
 
-.a-link:hover{
-  background-color : #607d8b;
-  color: black;
 
-}
 
 .fa-sun-o{
       font-size: initial;
@@ -149,3 +157,32 @@ header{
   font-weight: bold;
   text-align: center;
 }
+
+/* Cities */
+
+.div-city{
+  background-color :  #607d8b;
+  color: black;
+  width: 100%;
+  padding-top: 5px;
+
+}
+.div-city:hover{
+  background-color :#2a9689;
+  color: white;
+  width: 100%;
+
+}
+
+
+.a-link-city{
+  text-decoration: none;
+  color: black;
+  font-size:18px;
+  cursor: pointer;
+
+}
+
+
+
+
