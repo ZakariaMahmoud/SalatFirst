@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    console.log('constrictor');
+
     let id = this.route.snapshot.paramMap.get('id');
     this.cityid = id && parseInt(id) > 0 && parseInt(id) < 116 ? id : 69;
     this.getName('https://prayertimes.mahmoud.ma/api/cities/' + this.cityid);
@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
     this.getCities();
     setInterval(() => {
       moment.locale('ar-ma');
@@ -64,10 +63,6 @@ export class HomeComponent implements OnInit {
         }
       });
   }
-  goto(id: number) {
-    console.log(id);
-    this.router.navigate([id]);
-  }
   getPrayers(ROOT_URL: string) {
     this.http.get(ROOT_URL).subscribe((data: any) => {
       this.Prayer.fajr = data['fajr'];
@@ -79,30 +74,38 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  async nextPrayer() {
-    var time = this.timer.split(':');
-    var fajr = this.Prayer.fajr.split(':');
-    var dohr = this.Prayer.dohr.split(':');
-    var asr = this.Prayer.asr.split(':');
-    var maghreb = this.Prayer.maghreb.split(':');
-    var ichaa = this.Prayer.ichaa.split(':');
+   nextPrayer() {
+     if (
+       this.Prayer.fajr &&
+       this.Prayer.dohr &&
+       this.Prayer.asr &&
+       this.Prayer.maghreb &&
+       this.Prayer.ichaa
+     ) {
+       var time = this.timer.split(':');
+       var fajr = this.Prayer.fajr.split(':');
+       var dohr = this.Prayer.dohr.split(':');
+       var asr = this.Prayer.asr.split(':');
+       var maghreb = this.Prayer.maghreb.split(':');
+       var ichaa = this.Prayer.ichaa.split(':');
 
-    var inttime = parseInt(time[0] + time[1]);
-    var intfajr = parseInt(fajr[0] + fajr[1]);
-    var intdohr = parseInt(dohr[0] + dohr[1]);
-    var intasr = parseInt(asr[0] + asr[1]);
-    var intmaghreb = parseInt(maghreb[0] + maghreb[1]);
-    var intichaa = parseInt(ichaa[0] + ichaa[1]);
+       var inttime = parseInt(time[0] + time[1]);
+       var intfajr = parseInt(fajr[0] + fajr[1]);
+       var intdohr = parseInt(dohr[0] + dohr[1]);
+       var intasr = parseInt(asr[0] + asr[1]);
+       var intmaghreb = parseInt(maghreb[0] + maghreb[1]);
+       var intichaa = parseInt(ichaa[0] + ichaa[1]);
 
-    inttime >= intfajr ? (this.selector = 'dohr') : '';
-    inttime >= intdohr ? (this.selector = 'asr') : '';
-    inttime >= intasr ? (this.selector = 'maghreb') : '';
-    inttime >= intmaghreb ? (this.selector = 'ichaa') : '';
-    inttime >= intichaa ? (this.selector = 'fajr') : '';
+       inttime >= intfajr ? (this.selector = 'dohr') : '';
+       inttime >= intdohr ? (this.selector = 'asr') : '';
+       inttime >= intasr ? (this.selector = 'maghreb') : '';
+       inttime >= intmaghreb ? (this.selector = 'ichaa') : '';
+       inttime >= intichaa ? (this.selector = 'fajr') : '';
 
-    this.next_prayer = this.Prayer.nextPrayer(this.selector);
+       this.next_prayer = this.Prayer.nextPrayer(this.selector);
 
-    this.countDiffPrayer();
+       this.countDiffPrayer();
+     }
   }
 
   countDiffPrayer() {
